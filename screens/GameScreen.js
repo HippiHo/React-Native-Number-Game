@@ -13,12 +13,12 @@ let minBoundary = 1;
 let maxBoundary = 100;
 
 function GameScreen({ userNumber, onGameOver }) {
-  const initialGuess = generateRandomBetween(
+
+  const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(
     minBoundary,
     maxBoundary,
     userNumber
-  );
-  const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  ));
 
   useEffect(() => {
     if (currentGuess === userNumber) {

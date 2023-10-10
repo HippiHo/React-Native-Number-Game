@@ -11,7 +11,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
-  const [gameIsOver, setGameIsOver] = useState(true);
+  const [gameIsOver, setGameIsOver] = useState(false);
 
   const [fontsLoaded] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -35,7 +35,6 @@ export default function App() {
 
   function startGameHandler(pickedNumber) {
     setUserNumber(pickedNumber);
-    setGameIsOver(false);
   }
 
   function gameOverHandler() {
