@@ -1,5 +1,10 @@
 import { useCallback, useState } from "react";
-import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -69,7 +74,10 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
+        {/* for IOS >= 11 */}
         <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        {/* for Android */}
+        <StatusBar translucent={false} />
       </ImageBackground>
     </LinearGradient>
   );
