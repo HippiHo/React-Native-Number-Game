@@ -19,8 +19,11 @@ function GameScreen({ userNumber, onGameOver }) {
     maxBoundary,
     userNumber
   );
-  const [currentGuess, setCurrentGuess] = useState(initialGuess);
-  const [guessRounds, setGuessRounds] = useState([initialGuess]);
+
+  const [guessRounds, setGuessRounds] = useState([
+    { guess: initialGuess, roundNumber: 1 },
+  ]);
+  const currentGuess = guessRounds[0].guess;
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -56,11 +59,8 @@ function GameScreen({ userNumber, onGameOver }) {
       maxBoundary,
       currentGuess
     );
-    setCurrentGuess(newRndNumber);
-    setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
+    setGuessRounds((prevGuessRounds) => [{guess: newRndNumber, roundNumber: prevGuessRounds.length + 1}, ...prevGuessRounds]);
   }
-
-  const guessRoundsListLength = guessRounds.length;
 
   return (
     <View style={styles.gameContainer}>
@@ -88,8 +88,8 @@ function GameScreen({ userNumber, onGameOver }) {
           data={guessRounds}
           renderItem={(itemData) => (
             <GuessLogItem
-              roundNumber={guessRoundsListLength - itemData.index}
-              guess={itemData.item}
+              roundNumber={itemData.item.roundNumber}
+              guess={itemData.item.guess}
             />
           )}
           keyExtractor={(item) => item}
@@ -121,5 +121,5 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     padding: 16,
-  }
+  },
 });
